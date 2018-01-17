@@ -2,7 +2,7 @@ import arcpy
 import os
 
 #Specify output path and final output PDF
-outPath = r'\\DEQHQ1\TMDL_WR\MidCoast\GIS\Figures\python\makelocinstate'
+outPath = r'\\DEQHQ1\TMDL\TMDL_WR\MidCoast\GIS\Figures\python\makelocinstate'
 
 #Specify the map document and the data frame
 mxd = arcpy.mapping.MapDocument(r'\\DEQHQ1\TMDL\TMDL_WR\MidCoast\GIS\Figures\Upper_Yaquina_Maps\Upper_Yaquina_TMDL_BC_Automated_V2.mxd')
@@ -20,10 +20,10 @@ for lyrName in lyrList:
     lyr.visible = True
 
 #Export each map image
-    tmpPNG = outPath + lyrName + '_.png'
+    tmpPNG = outPath + "\\" + lyrName + '_.png'
     if os.path.exists(tmpPNG):
         os.remove(tmpPNG)
-    arcpy.mapping.ExportToPNG(mxd, tmpPNG)
+    arcpy.mapping.ExportToPNG(map_document = mxd, out_png = tmpPNG)
 
 #Turn off layer visibility and clean up for next pass through the loop
     lyr.visible = False
